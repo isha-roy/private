@@ -27,15 +27,23 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // Video ended - show love reveal
-  if (video) {
-    video.addEventListener("ended", () => {
-      videoBox.classList.add("hidden");
-      // Small delay for smooth transition
-      setTimeout(() => {
-        loveReveal.classList.remove("hidden");
-      }, 300);
-    });
-  }
+  // Video ended - show love reveal
+if (video) {
+  video.addEventListener("ended", () => {
+    videoBox.classList.add("hidden");
+
+    // Small delay for smooth transition
+    setTimeout(() => {
+      loveReveal.classList.remove("hidden");
+      loveReveal.classList.add("show");
+
+      // 🔽 START LOVE TIMER HERE (STEP 4)
+      startLoveTimer();
+
+    }, 300);
+  });
+}
+
 
   // Close love reveal
   if (closeLoveBtn) {
@@ -118,3 +126,34 @@ dockItems.forEach(item => {
     fadeVolume(1);
   });
 });
+
+function startLoveTimer() {
+  const startDate = new Date("2025-04-18T00:00:00"); // dating start
+  const timerEl = document.getElementById("loveTimer");
+
+  if (!timerEl) return;
+
+  function updateTimer() {
+    const now = new Date();
+    let diff = now - startDate;
+
+    if (diff < 0) diff = 0;
+
+    const seconds = Math.floor(diff / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+    const days = Math.floor(hours / 24);
+
+    const months = Math.floor(days / 30);
+    const remDays = days % 30;
+    const remHours = hours % 24;
+    const remmins = minutes % 60;
+    const remSeconds = seconds % 60;
+
+    timerEl.textContent =
+      `${months} months · ${remDays} days · ${remHours} hrs · ${remmins} min · ${remSeconds} sec`;
+  }
+
+  updateTimer();
+  setInterval(updateTimer, 1000);
+}
