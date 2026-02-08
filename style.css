@@ -427,3 +427,59 @@ img[src*="banner"] {
   opacity: 0.9;
 }
 
+.sparkle-text {
+  position: relative;
+  display: inline-block;
+  font-weight: 600;
+  color: #b03060;
+}
+
+.sparkle-text span {
+  position: relative;
+  z-index: 2;
+}
+
+/* sparkles */
+.sparkle {
+  position: absolute;
+  width: 22px;             /* bigger */
+  height: 22px;
+  fill: #b64b76;             /* darker than bg */
+  opacity: 0;
+  animation: sparklePulse 3s ease-in-out infinite;
+}
+
+/* IMPORTANT: use nth-of-type, not nth-child */
+.sparkle-text svg:nth-of-type(1) {
+  top: -8px;
+  left: 8%;
+  animation-delay: 0s;
+}
+.sparkle-text svg:nth-of-type(2) {
+  top: 75%;
+  left: 45%;
+  animation-delay: 1s;
+}
+.sparkle-text svg:nth-of-type(3) {
+  top: -6px;
+  left: 88%;
+  animation-delay: 0.5s;
+}
+
+@keyframes sparklePulse {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  40% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  70% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+}
